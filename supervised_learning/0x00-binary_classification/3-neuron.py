@@ -31,14 +31,20 @@ class Neuron(object):
         """ Getter A """
         return self.__A
 
+    @staticmethod
+    def sigmoid(X):
+        """ Sigmoid function """
+        return 1.0/(1.0 + np.exp(-X))
+
     def forward_prop(self, X):
         """ Method for Forward Propagation """
-        self.__A = 1.0/(1.0 + np.exp(-(np.dot(self.W, X) + self.b)))
+        self.__A = Neuron.sigmoid(np.dot(self.W, X) + self.b)
         return self.__A
 
     def cost(self, Y, A):
         """ Method to compute the cost """
-        cost_log = np.dot(A, np.log(Y.T + 1.0000001))
-        cost_log += np.dot((1.0000001 - A), np.log(1.0000001 - Y.T))
+        h = Neuron.sigmoid(A)
+        cost_log = np.dot(h, np.log(Y.T + 1.0000001))
+        cost_log += np.dot((1.0000001 - h), np.log(1.0000001 - Y.T))
         cost_log *= (-1/Y.shape[1])
         return cost_log[0][0]
