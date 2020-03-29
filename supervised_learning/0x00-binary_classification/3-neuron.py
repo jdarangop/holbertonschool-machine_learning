@@ -43,8 +43,13 @@ class Neuron(object):
 
     def cost(self, Y, A):
         """ Method to compute the cost """
-        h = Neuron.sigmoid(A)
-        cost_log = np.dot(h, np.log(Y.T + 0.0000001))
+        #h = Neuron.sigmoid(A)
+        """cost_log = np.dot(h, np.log(Y.T + 0.0000001))
         cost_log += np.dot((1.0000001 - h), np.log(1.0000001 - Y.T))
         cost_log *= (-1/Y.shape[1])
-        return cost_log[0][0]
+        cost = (-1/Y.shape[1]) * np.sum( np.multiply(np.log(A), Y) + np.multiply(np.log(1.0000001 - A), (1.0000001 - Y)))
+        error = (-Y * np.log(A)) - ((1.0000001 - Y) * np.log(1.0000001 - A))
+        cost = (1/Y.shape[1]) * sum(error)
+        cost = (-1.0) * np.mean(np.multiply(Y, np.log(A)) + np.multiply(1.0000001 - Y, np.log(1.0000001 - A)), axis=1)"""
+        cost = (-1.0) * np.mean((Y * np.log(A)) + ((1.0000001 - Y) * np.log(1.0000001 - A)), axis=1)
+        return cost[0]
