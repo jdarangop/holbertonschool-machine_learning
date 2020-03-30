@@ -52,7 +52,7 @@ class Neuron(object):
         m = Y.shape[1]
         A = self.forward_prop(X)
         dZ = A - Y
-        dW = (1 / m) * np.matmul(X, dZ.T).T
+        dW = (1 / m) * np.dot(X, dZ.T).T
         db = (1 / m) * np.sum(dZ)
         self.__W -= (alpha * dW)
         self.__b -= (alpha * db)
