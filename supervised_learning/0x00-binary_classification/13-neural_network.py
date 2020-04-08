@@ -72,10 +72,10 @@ class NeuralNetwork(object):
         """ Method to compute the gradient descent """
         m = Y.shape[1]
         dZ2 = A2 - Y
-        dW2 = (1 / m) * np.dot(A1, dZ2.T).T
+        dW2 = (1 / m) * np.matmul(A1, dZ2.T).T
         db2 = (1 / m) * np.sum(dZ2)
-        dZ1 = np.dot(self.W2.T, dZ2) * A1
-        dW1 = (1 / m) * np.dot(dZ1, X.T)
+        dZ1 = np.matmul(self.W2.T, dZ2) * A1
+        dW1 = (1 / m) * np.matmul(dZ1, X.T)
         db1 = (1 / m) * np.sum(dZ1)
         self.__W1 = self.__W1 - (alpha * dW1)
         self.__W2 = self.__W2 - (alpha * dW2)
