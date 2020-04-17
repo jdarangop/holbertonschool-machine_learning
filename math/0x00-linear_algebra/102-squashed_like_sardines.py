@@ -20,17 +20,18 @@ def cat_matrices(mat1, mat2, axis=0):
         axis: int
     """
 
-    if axis == 0:
-        if dim(mat1) != dim(mat2):
-            return None
-        else:
+    if dim(mat1) != dim(mat2):
+        return None
+
+    else:
+        if axis == 0:
             result = [*mat1, *mat2]
             return result
-    else:
-        result = []
-        for i in range(len(mat1)):
-            result.append(cat_matrices(mat1[i], mat2[i], axis - 1))
-        if None in result:
-            return None
         else:
-            return result
+            result = []
+            for i in range(len(mat1)):
+                result.append(cat_matrices(mat1[i], mat2[i], axis - 1))
+            if None in result:
+                return None
+            else:
+                return result
