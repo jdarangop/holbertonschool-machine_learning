@@ -3,6 +3,10 @@
 
 
 def dim(matrix):
+    """ find the dimention of a array
+        matrix: list
+    """
+
     if type(matrix[0]) in (int, float):
         return 0
     else:
