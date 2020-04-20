@@ -20,9 +20,8 @@ def cat_matrices(mat1, mat2, axis=0):
         axis: int
     """
 
-    if dim(mat1) != dim(mat2):
+    if dim(mat1) != dim(mat2) or axis > dim(mat1) or axis > dim(mat1):
         return None
-
     else:
         if axis == 0:
             result = [*mat1, *mat2]
