@@ -27,45 +27,49 @@ student_grades = np.random.normal(68, 15, 50)
 
 plt.figure()
 
+
 # 0 graph
-plt.subplot2grid(shape=(3, 2), loc=(0, 0))
+plt.subplot('321')
 plt.plot(y0, 'r-')
 plt.xlim(0, 10)
 
 # 1 graph
-plt.subplot2grid(shape=(3, 2), loc=(0, 1))
-plt.scatter(x1, y1, c='m')
-plt.xlabel('Height (in)')
-plt.ylabel('Weight (lbs)')
-plt.suptitle('Men\'s Height vs Weight')
+plt.subplot('322')
+plt.scatter(x1, y1, s=7, c='m')
+plt.xlabel('Height (in)', fontsize=7)
+plt.ylabel('Weight (lbs)', fontsize=7)
+plt.title('Men\'s Height vs Weight', fontsize=7)
 
 # 2 graph
-plt.subplot2grid(shape=(3, 2), loc=(1, 0))
+plt.subplot('323')
 plt.plot(x2, y2)
-plt.xlabel('Time (years)')
-plt.ylabel('Fraction Remaining')
-plt.suptitle('Exponential Decay of C-14')
+plt.xlabel('Time (years)', fontsize=7)
+plt.ylabel('Fraction Remaining', fontsize=7)
+plt.title('Exponential Decay of C-14', fontsize=7)
 plt.yscale('log')
 plt.xlim(0, 28650)
 
 # 3 graph
-plt.subplot2grid(shape=(3, 2), loc=(1, 1))
+plt.subplot('324')
 line1 = plt.plot(x3, y31, 'r--', label='C-14')
 line2 = plt.plot(x3, y32, 'g-', label='Ra-226')
-plt.xlabel('Time (years)')
-plt.ylabel('Fraction Remaining')
-plt.suptitle('Exponential Decay of Radioactive Elements')
+plt.xlabel('Time (years)', fontsize=7)
+plt.ylabel('Fraction Remaining', fontsize=7)
+plt.title('Exponential Decay of Radioactive Elements', fontsize=7)
 plt.xlim(0, 20000)
 plt.ylim(0, 1)
-plt.legend()
+plt.legend(prop={'size': 6})
 
 # 4 graph
 plt.subplot2grid(shape=(3, 2), loc=(2, 0), colspan=2)
 plt.hist(student_grades, bins=range(0, 101, 10), edgecolor='black')
-plt.xlabel('Grades')
-plt.ylabel('Number of Students')
-plt.suptitle('Project A')
+plt.xlabel('Grades', fontsize=7)
+plt.ylabel('Number of Students', fontsize=7)
+plt.title('Project A', fontsize=7)
 plt.xlim(0, 100)
+plt.ylim(0, 30)
 
-plt.title('All in One')
+plt.suptitle('All in One')
+plt.subplots_adjust(wspace=0.5, hspace=0.9)
+
 plt.show()
