@@ -9,7 +9,7 @@ def poly_derivative(poly):
     """
     result = []
 
-    if poly is None or poly == []:
+    if poly is None or type(poly) != list or poly == []:
         return None
 
     for i in range(len(poly)):

@@ -11,6 +11,9 @@ def poly_integral(poly, C=0):
     if C is None or type(C) not in (int, float):
         return None
 
+    if poly is None or poly == []:
+        return None
+
     result = [C]
     for i in range(len(poly)):
         if poly[i] is None or type(poly[i]) not in (int, float):
@@ -20,4 +23,8 @@ def poly_integral(poly, C=0):
             coeficient = int(coeficient)
         result.append(coeficient)
 
-    return result
+    j = len(result) - 1
+    while(result[j] == 0.0):
+        j -= 1
+
+    return result[:j + 1]
