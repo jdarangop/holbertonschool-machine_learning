@@ -13,8 +13,10 @@ def poly_derivative(poly):
         return None
 
     for i in range(len(poly)):
-        if type(poly[i]) != int:
+        if type(poly[i]) not in (int, float):
             return None
+        elif len(poly) == 1:
+            result.append(0)
         else:
             if i == 0:
                 continue
