@@ -8,7 +8,8 @@ def poly_integral(poly, C=0):
         C: int constant of integration
         Return: list with the coeficients after the integration
     """
-    if C is None or type(C) not in (int, float):
+    # if C is None or type(C) not in (int, float):
+    if C is None or type(C) != int:
         return None
 
     if poly is None or type(poly) != list or poly == []:
