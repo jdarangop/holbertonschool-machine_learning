@@ -11,7 +11,7 @@ def poly_integral(poly, C=0):
     if C is None or type(C) not in (int, float):
         return None
 
-    if poly is None or poly == []:
+    if poly is None or type(poly) != list or poly == []:
         return None
 
     result = [C]
