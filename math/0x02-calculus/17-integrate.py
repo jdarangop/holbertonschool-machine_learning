@@ -23,8 +23,4 @@ def poly_integral(poly, C=0):
             coeficient = int(coeficient)
         result.append(coeficient)
 
-    j = len(result) - 1
-    while(result[j] == 0.0):
-        j -= 1
-
-    return result[:j + 1]
+    return result
