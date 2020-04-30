@@ -22,6 +22,8 @@ class Poisson(object):
 
     def pmf(self, k):
         """ Calculates the value of the PMF for a given number of successes """
+        if k < 0:
+            return 0
         factorial = 1
         for i in range(1, int(k) + 1):
             factorial *= i
@@ -31,6 +33,8 @@ class Poisson(object):
 
     def cdf(self, k):
         """ Calculates the value of the CDF for a given number of successes """
+        if k < 0:
+            return 0
         result = 0
         for i in range(k + 1):
             result += self.pmf(i)

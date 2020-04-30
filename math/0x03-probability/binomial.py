@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """ Binomial """
-import math
 
 
 class Binomial(object):
@@ -27,10 +26,17 @@ class Binomial(object):
                 self.n = int(mean / pro)
                 self.p = float(mean / self.n)
 
+    @staticmethod
+    def factorial(n):
+        result = 1
+        for i in range(1, n + 1):
+            result *= i
+        return result
+
     def pmf(self, k):
         """ Calculates the value of the PMF for a given number of successes """
-        result = ((math.factorial(self.n) /
-                  (math.factorial(k) * math.factorial(self.n - k))) *
+        result = ((Binomial.factorial(self.n) /
+                  (Binomial.factorial(k) * Binomial.factorial(self.n - k))) *
                   ((self.p ** k) *
                    ((1 - self.p) ** (self.n - k))))
         return result
