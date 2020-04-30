@@ -20,6 +20,13 @@ class Poisson(object):
             else:
                 self.lambtha = float(sum(data) / len(data))
 
+    @staticmethod
+    def factorial(n):
+        result = 1
+        for i in range(1, n + 1):
+            result *= i
+        return result
+
     def pmf(self, k):
         """ Calculates the value of the PMF for a given number of successes """
         if k <= 0:
@@ -33,9 +40,9 @@ class Poisson(object):
 
     def cdf(self, k):
         """ Calculates the value of the CDF for a given number of successes """
-        if k <= 0:
+        if k < 0:
             return 0
         result = 0
-        for i in range(k + 1):
-            result += self.pmf(i)
-        return result
+        for i in range(int(k) + 1):
+            result += ((self.lambtha ** i) / Poisson.factorial(i))
+        return result * (2.7182818285 ** -self.lambtha)
