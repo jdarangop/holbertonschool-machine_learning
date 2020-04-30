@@ -40,7 +40,8 @@ class Binomial(object):
         if k < 0:
             return 0
         result = ((Binomial.factorial(self.n) /
-                  (Binomial.factorial(int(k)) * Binomial.factorial(self.n - int(k)))) *
+                  (Binomial.factorial(int(k)) *
+                   Binomial.factorial(self.n - int(k)))) *
                   ((self.p ** int(k)) *
                    ((1 - self.p) ** (self.n - int(k)))))
         return result
@@ -50,6 +51,6 @@ class Binomial(object):
         if k < 0:
             return 0
         result = 0
-        for i in range(k + 1):
+        for i in range(int(k) + 1):
             result += self.pmf(i)
         return result
