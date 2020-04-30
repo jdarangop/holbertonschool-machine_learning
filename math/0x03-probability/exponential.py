@@ -8,7 +8,7 @@ class Exponential(object):
     def __init__(self, data=None, lambtha=1.):
         """ Initialization method """
         if data is None:
-            if lambtha < 0:
+            if lambtha <= 0:
                 raise ValueError('lambtha must be a positive value')
             else:
                 self.lambtha = float(lambtha)
