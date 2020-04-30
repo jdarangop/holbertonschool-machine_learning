@@ -8,7 +8,7 @@ class Normal(object):
     def __init__(self, data=None, mean=0., stddev=1.):
         """ Init method """
         if data is None:
-            if stddev < 0:
+            if stddev <= 0:
                 raise ValueError('stddev must be a positive value')
             else:
                 self.mean = float(mean)
