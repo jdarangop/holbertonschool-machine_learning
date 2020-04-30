@@ -22,8 +22,10 @@ class Binomial(object):
                 raise ValueError('data must contain multiple values')
             else:
                 mean = sum(data) / int(len(data))
-                pro = 2 * (mean / int(len(data)))
-                self.n = int(mean / pro)
+                var = sum([(i - mean) ** 2 for i in data]) / len(data)
+                pro = 1 - (var/mean)
+                n = mean / pro
+                self.n = int(round(n))
                 self.p = float(mean / self.n)
 
     @staticmethod
