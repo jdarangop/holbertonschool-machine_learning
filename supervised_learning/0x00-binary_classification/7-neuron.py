@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """ Class Neuron """
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 class Neuron(object):
@@ -33,7 +34,9 @@ class Neuron(object):
 
     def forward_prop(self, X):
         """ Method for Forward Propagation """
-        self.__A = self.__A = 1.0/(1.0 + np.exp(-(np.dot(self.W, X) + self.b)))
+        self.__A = self.__A = 1.0/(1.0 +
+                                   np.exp(-(np.matmul(self.W, X)
+                                          + self.b)))
         return self.__A
 
     def cost(self, Y, A):
@@ -51,7 +54,7 @@ class Neuron(object):
         """ Method to compute the gradient descent """
         m = Y.shape[1]
         dZ = A - Y
-        dW = (1 / m) * np.dot(X, dZ.T).T
+        dW = (1 / m) * np.matmul(X, dZ.T).T
         db = (1 / m) * np.sum(dZ)
         self.__W = self.__W - (alpha * dW)
         self.__b = self.__b - (alpha * db)

@@ -33,5 +33,5 @@ class Neuron(object):
 
     def forward_prop(self, X):
         """ Method for Forward Propagation """
-        self.__A = 1.0/(1.0 + np.exp(-(np.dot(self.W, X) + self.b)))
+        self.__A = 1.0/(1.0 + np.exp(-(np.matmul(self.W, X) + self.b)))
         return self.__A

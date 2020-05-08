@@ -52,8 +52,9 @@ class NeuralNetwork(object):
 
     def forward_prop(self, X):
         """ Method for Forward Propagation """
-        self.__A1 = 1.0/(1.0 + np.exp(-(np.dot(self.W1, X) + self.b1)))
-        self.__A2 = 1.0/(1.0 + np.exp(-(np.dot(self.W2, self.__A1) + self.b2)))
+        self.__A1 = 1.0/(1.0 + np.exp(-(np.matmul(self.W1, X) + self.b1)))
+        self.__A2 = 1.0/(1.0 +
+                         np.exp(-(np.matmul(self.W2, self.__A1) + self.b2)))
         return self.__A1, self.__A2
 
     def cost(self, Y, A):
