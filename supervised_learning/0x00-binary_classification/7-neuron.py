@@ -74,6 +74,12 @@ class Neuron(object):
             if alpha < 0:
                 raise ValueError('alpha must be positive')
 
+        if type(step) != int:
+            raise TypeError('step must be an integer')
+        else:
+            if step < 0 or step > iterations:
+                raise ValueError('step must be positive and <= iterations')
+
         cost_list = []
 
         for i in range(iterations):
@@ -88,9 +94,10 @@ class Neuron(object):
         if verbose:
             print("Cost after {} iterations: {}".format(i + 1, cost))
 
-        plt.plot(list(range(iterations)), cost_list)
-        plt.title('Training Cost')
-        plt.xlabel('iteration')
-        plt.ylabel('cost')
+        if graph:
+            plt.plot(list(range(iterations)), cost_list)
+            plt.title('Training Cost')
+            plt.xlabel('iteration')
+            plt.ylabel('cost')
 
         return A, cost
