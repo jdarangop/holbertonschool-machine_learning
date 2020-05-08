@@ -75,7 +75,7 @@ class NeuralNetwork(object):
         dZ2 = A2 - Y
         dW2 = (1 / m) * np.matmul(A1, dZ2.T).T
         db2 = (1 / m) * np.sum(dZ2, axis=1, keepdims=True)
-        dZ1 = np.matmul(self.W2.T, dZ2) * A1
+        dZ1 = np.matmul(self.W2.T, dZ2) * A1 * (1 - A1)
         dW1 = (1 / m) * np.matmul(dZ1, X.T)
         db1 = (1 / m) * np.sum(dZ1, axis=1, keepdims=True)
         self.__W1 = self.__W1 - (alpha * dW1)
