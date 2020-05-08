@@ -19,6 +19,8 @@ class DeepNeuralNetwork(object):
         else:
             if any(list(map(lambda x: x <= 0, layers))):
                 raise TypeError('layers must be a list of positive integers')
+            if len(layers) < 1:
+                raise TypeError('layers must be a list of positive integers')
         self.__L = len(layers)
         self.__cache = {}
         self.__weights = {}
