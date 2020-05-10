@@ -76,13 +76,14 @@ class DeepNeuralNetwork(object):
 
     def gradient_descent(self, Y, cache, alpha=0.05):
         """ Method to compute the gradient descent """
+        weights = self.weights.copy()
         m = Y.shape[1]
         for i in range(1, self.L + 1)[::-1]:
             A = cache["A{}".format(i)]
             if i == self.L:
                 dZ = A - Y
             else:
-                dZ = np.matmul(W.T, dZ) * A * (1 - A)
+                dZ = np.matmul(weights["W" + str(i+1)].T, dZ) * A * (1 - A)
             dW = (1 / m) * np.matmul(dZ, cache["A" + str(i - 1)].T)
             db = (1 / m) * np.sum(dZ, axis=1, keepdims=True)
             W = self.weights["W" + str(i)] - (alpha * dW)
