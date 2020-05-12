@@ -11,12 +11,9 @@ def one_hot_encode(Y, classes):
     """
     if Y is None or type(classes) != int or classes < 0:
          return None
-    try:
-        result = np.zeros((classes, len(Y)))
-        counter = 0
-        for i in Y:
-            result[i, counter] += 1
-            counter += 1
-        return result
-    except:
-        return None
+    result = np.zeros((classes, len(Y)))
+    counter = 0
+    for i in Y:
+        result[i, counter] += 1
+        counter += 1
+    return result
