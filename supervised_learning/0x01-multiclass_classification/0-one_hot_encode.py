@@ -14,6 +14,8 @@ def one_hot_encode(Y, classes):
     result = np.zeros((classes, len(Y)))
     counter = 0
     for i in Y:
+        if i < 0:
+            return None
         result[i, counter] += 1
         counter += 1
     return result
