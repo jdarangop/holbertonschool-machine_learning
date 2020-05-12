@@ -9,8 +9,8 @@ def one_hot_encode(Y, classes):
         classes: is the maximum number of classes found in Y
         Return: numpy ndarray with one-hot matrix.
     """
-    if Y is None or type(classes) != int or classes < 0:
-         return None
+    if type(Y) != np.ndarray or type(classes) != int or classes < np.max(Y):
+        return None
     result = np.zeros((classes, len(Y)))
     counter = 0
     for i in Y:
