@@ -130,20 +130,21 @@ class DeepNeuralNetwork(object):
             if type(step) != int:
                 raise TypeError('step must be an integer')
             else:
-                if step < 0 or step > iterations:
+                if step <= 0 or step > iterations:
                     raise ValueError('step must be positive and <= iterations')
 
         cost_list = []
         for i in range(iterations):
             A, cache = self.forward_prop(X)
             self.gradient_descent(Y, cache, alpha)
-            cost_list.append(self.cost(Y, A))
-            if verbose:
-                print("Cost after {} iterations: {}"
-                      .format(i, self.cost(Y, A)))
-        A, cost = self.evaluate(X, Y)
-        if verbose:
-            print("Cost after {} iterations: {}".format(i + 1, cost))
+            if i % step == 0 or i == iterations:
+                cost_list.append(self.cost(Y, A))
+                if verbose:
+                    print("Cost after {} iterations: {}"
+                          .format(i, self.cost(Y, A)))
+        # A, cost = self.evaluate(X, Y)
+        # if verbose:
+            # print("Cost after {} iterations: {}".format(i + 1, cost))
 
         if graph:
             plt.plot(list(range(iterations)), cost_list)
@@ -151,7 +152,7 @@ class DeepNeuralNetwork(object):
             plt.xlabel('iteration')
             plt.ylabel('cost')
 
-        return A, cost
+        return self.evaluate(X, Y)
 
     def save(self, filename):
         """ Saves the instance object to a file in pickle format """
