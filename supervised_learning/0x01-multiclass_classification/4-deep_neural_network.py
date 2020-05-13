@@ -126,11 +126,12 @@ class DeepNeuralNetwork(object):
             if alpha < 0:
                 raise ValueError('alpha must be positive')
 
-        if type(step) != int:
-            raise TypeError('step must be an integer')
-        else:
-            if step < 0 or step > iterations:
-                raise ValueError('step must be positive and <= iterations')
+        if graph is True or verbose is True:
+            if type(step) != int:
+                raise TypeError('step must be an integer')
+            else:
+                if step < 0 or step > iterations:
+                    raise ValueError('step must be positive and <= iterations')
 
         cost_list = []
         for i in range(iterations):
