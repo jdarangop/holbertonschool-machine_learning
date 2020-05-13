@@ -74,11 +74,12 @@ class Neuron(object):
             if alpha < 0:
                 raise ValueError('alpha must be positive')
 
-        if type(step) != int:
-            raise TypeError('step must be an integer')
-        else:
-            if step < 0 or step > iterations:
-                raise ValueError('step must be positive and <= iterations')
+        if graph is True or verbose is True:
+            if type(step) != int:
+                raise TypeError('step must be an integer')
+            else:
+                if step < 0 or step > iterations:
+                    raise ValueError('step must be positive and <= iterations')
 
         cost_list = []
 
@@ -86,9 +87,10 @@ class Neuron(object):
             A = self.forward_prop(X)
             self.gradient_descent(X, Y, A, alpha)
             cost_list.append(self.cost(Y, A))
-            if verbose:
-                print("Cost after {} iterations: {}"
-                      .format(i, self.cost(Y, A)))
+            if i % step == 0 or i == iterations:
+                if verbose:
+                    print("Cost after {} iterations: {}"
+                          .format(i, self.cost(Y, A)))
 
         A, cost = self.evaluate(X, Y)
         if verbose:
