@@ -117,12 +117,12 @@ class DeepNeuralNetwork(object):
         cost_list = []
         for i in range(iterations):
             A, cache = self.forward_prop(X)
-            self.gradient_descent(Y, cache, alpha)
+            self.gradient_descent(Y, self.cache, alpha)
             if i % step == 0 or i == iterations:
-                cost_list.append(self.cost(Y, A))
-            if verbose:
-                print("Cost after {} iterations: {}"
-                      .format(i, self.cost(Y, A)))
+                cost_list.append(self.cost(Y, self.cache["A" + str(self.L)]))
+                if verbose:
+                    print("Cost after {} iterations: {}"
+                          .format(i, self.cost(Y, A)))
         A, cost = self.evaluate(X, Y)
         if verbose:
             print("Cost after {} iterations: {}".format(i + 1, cost))
