@@ -104,8 +104,8 @@ class DeepNeuralNetwork(object):
                     dZ = np.matmul(W.T, dZ) * A * (1 - A)
                 else:
                     dZ = np.matmul(W.T, dZ) * (1 - (A ** 2))
-            dW = (1 / m) * np.matmul(dZ, cache["A" + str(i - 1)].T)
-            db = (1 / m) * np.sum(dZ, axis=1, keepdims=True)
+            dW = np.matmul(dZ, cache["A" + str(i - 1)].T) / m
+            db = np.sum(dZ, axis=1, keepdims=True) / m
             W = self.weights["W" + str(i)] - (alpha * dW)
             b = self.weights["b" + str(i)] - (alpha * db)
             self.weights["W" + str(i)] = W
