@@ -11,10 +11,10 @@ def one_hot_decode(one_hot):
     if type(one_hot) != np.ndarray:
         return None
     result = []
-    for i in range(one_hot.shape[0]):
-        element = np.argmax(one_hot[:, i])
-        if one_hot[element, i] != 1:
+    for i in range(one_hot.shape[1]):
+        if any(np.where((one_hot[:, i] != 0) | (one_hot[:, i] != 1), False, True)):
             return None
+        element = np.argmax(one_hot[:, i])
         result.append(element)
     result = np.array(result)
     return result
