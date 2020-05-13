@@ -117,7 +117,8 @@ class DeepNeuralNetwork(object):
         for i in range(iterations):
             A, cache = self.forward_prop(X)
             self.gradient_descent(Y, cache, alpha)
-            cost_list.append(self.cost(Y, A))
+            if i % step == 0 or i == iterations:
+                cost_list.append(self.cost(Y, A))
             if verbose:
                 print("Cost after {} iterations: {}"
                       .format(i, self.cost(Y, A)))
@@ -131,7 +132,7 @@ class DeepNeuralNetwork(object):
             plt.xlabel('iteration')
             plt.ylabel('cost')
 
-        return A, cost
+        return self.evaluate(X, Y)
 
     def save(self, filename):
         """ Saves the instance object to a file in pickle format """
