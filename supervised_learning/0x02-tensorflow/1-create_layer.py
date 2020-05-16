@@ -10,7 +10,8 @@ def create_layer(prev, n, activation):
         n: (int) number of nodes in the layer.
         activation: (tf.nn) activation function.
     """
+    init = tf.contrib.layers.variance_scaling_initializer(mode="FAN_AVG")
     layer = tf.layers.Dense(units=n, activation=activation,
-                            kernel_initializer=tf.contrib.layers.variance_scaling_initializer(mode="FAN_AVG"),
+                            kernel_initializer=init,
                             name='layer')
     return layer(prev)
