@@ -9,7 +9,7 @@ def calculate_accuracy(y, y_pred):
         y_pred: (tf.tensor) network's predictions.
         Returns: (tf.tensor) decimal accuracy of the prediction.
     """
-    y_max = tf.argmax(y_pred, axis=1)
+    y_max = tf.argmax(y, axis=1)
     y_pred_max = tf.argmax(y_pred, axis=1)
     bias = tf.cast(tf.equal(y_max, y_pred_max), dtype=tf.float32)
     return tf.reduce_mean(bias)
