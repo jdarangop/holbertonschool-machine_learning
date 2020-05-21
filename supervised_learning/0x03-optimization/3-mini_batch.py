@@ -21,6 +21,7 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
     """
     m = X_train.shape[0]
     loader = tf.train.import_meta_graph("{}.meta".format(load_path))
+    saver = tf.train.Saver()
     with tf.Session() as sess:
         loader.restore(sess, load_path)
         x = tf.get_collection("x")[0]
@@ -28,27 +29,43 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
         accuracy = tf.get_collection("accuracy")[0]
         loss = tf.get_collection("loss")[0]
         train_op = tf.get_collection("train_op")[0]
-        for i in range(epochs):
+        for i in range(epochs + 1):
             X_shu, Y_shu = shuffle_data(X_train, Y_train)
             accu_train = sess.run(accuracy, feed_dict={x: X_shu, y: Y_shu})
             loss_train = sess.run(loss, feed_dict={x: X_shu, y: Y_shu})
             accu_valid = sess.run(accuracy, feed_dict={x: X_valid, y: Y_valid})
             loss_valid = sess.run(loss, feed_dict={x: X_valid, y: Y_valid})
+            if i == 0:
+                print("After {} epochs:".format(i))
+                print("\tTraining Cost: {}".format(loss_train))
+                print("\tTraining Accuracy: {}".format(accu_train))
+                print("\tValidation Cost: {}".format(loss_valid))
+                print("\tValidation Accuracy: {}".format(accu_valid))
+            counter = 0
+            j = 0
+            z = batch_size
+            while (z <= m):
+                sess.run(train_op, feed_dict={x: X_shu[j: z], y: Y_shu[j: z]})
+                if counter % 100 == 0 and counter != 0:
+                    step_accu = sess.run(accuracy,
+                                         feed_dict={x: X_shu[j: z],
+                                                    y: Y_shu[j: z]})
+                    step_cost = sess.run(loss, feed_dict={x: X_shu[j: z],
+                                                          y: Y_shu[j: z]})
+                    print("\tStep {}:".format(counter))
+                    print("\t\tCost: {}".format(step_cost))
+                    print("\t\tAccuracy: {}".format(step_accu))
+                if (z + batch_size <= m):
+                    j += batch_size
+                    z += batch_size
+                else:
+                    j += m % batch_size
+                    z += m % batch_size
+                counter += 1
             print("After {} epochs:".format(i))
             print("\tTraining Cost: {}".format(loss_train))
             print("\tTraining Accuracy: {}".format(accu_train))
             print("\tValidation Cost: {}".format(loss_valid))
             print("\tValidation Accuracy: {}".format(accu_valid))
-            counter = 100
-            for j in range(0, m, batch_size):
-                sess.run(train_op, feed_dict={x: X_shu, y: Y_shu})
-                if j >= counter:
-                    step_accu = sess.run(accuracy,
-                                         feed_dict={x: X_shu, y: Y_shu})
-                    step_cost = sess.run(loss, feed_dict={x: X_shu, y: Y_shu})
-                    print("\tStep {}:".format(counter))
-                    print("\t\tCost: {}".format(step_cost))
-                    print("\t\tAccuracy: {}".format(step_accu))
-                    counter += 100
 
         return saver.save(sess, save_path)
