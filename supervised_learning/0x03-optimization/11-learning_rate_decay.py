@@ -15,5 +15,5 @@ def learning_rate_decay(alpha, decay_rate,
                            that should occur before alpha is decayed.
         Returns: the updated alpha value.
     """
-    alpha /= (1 + (global_step // decay_step))
+    alpha /= (1 + (decay_rate * (global_step // decay_step)))
     return alpha

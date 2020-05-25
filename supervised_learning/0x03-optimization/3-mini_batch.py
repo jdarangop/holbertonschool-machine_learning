@@ -35,37 +35,33 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
             loss_train = sess.run(loss, feed_dict={x: X_shu, y: Y_shu})
             accu_valid = sess.run(accuracy, feed_dict={x: X_valid, y: Y_valid})
             loss_valid = sess.run(loss, feed_dict={x: X_valid, y: Y_valid})
-            if i == 0:
-                print("After {} epochs:".format(i))
-                print("\tTraining Cost: {}".format(loss_train))
-                print("\tTraining Accuracy: {}".format(accu_train))
-                print("\tValidation Cost: {}".format(loss_valid))
-                print("\tValidation Accuracy: {}".format(accu_valid))
-            counter = 0
-            j = 0
-            z = batch_size
-            while (z <= m):
-                sess.run(train_op, feed_dict={x: X_shu[j: z], y: Y_shu[j: z]})
-                if counter % 100 == 0 and counter != 0:
-                    step_accu = sess.run(accuracy,
-                                         feed_dict={x: X_shu[j: z],
-                                                    y: Y_shu[j: z]})
-                    step_cost = sess.run(loss, feed_dict={x: X_shu[j: z],
-                                                          y: Y_shu[j: z]})
-                    print("\tStep {}:".format(counter))
-                    print("\t\tCost: {}".format(step_cost))
-                    print("\t\tAccuracy: {}".format(step_accu))
-                if (z + batch_size <= m):
-                    j += batch_size
-                    z += batch_size
-                else:
-                    j += m % batch_size
-                    z += m % batch_size
-                counter += 1
             print("After {} epochs:".format(i))
             print("\tTraining Cost: {}".format(loss_train))
             print("\tTraining Accuracy: {}".format(accu_train))
             print("\tValidation Cost: {}".format(loss_valid))
             print("\tValidation Accuracy: {}".format(accu_valid))
+            if i < epochs:
+                counter = 0
+                j = 0
+                z = batch_size
+                while (z <= m):
+                    sess.run(train_op, feed_dict={x: X_shu[j: z],
+                                                  y: Y_shu[j: z]})
+                    if (counter + 1) % 100 == 0 and counter != 0:
+                        step_accu = sess.run(accuracy,
+                                             feed_dict={x: X_shu[j: z],
+                                                        y: Y_shu[j: z]})
+                        step_cost = sess.run(loss, feed_dict={x: X_shu[j: z],
+                                                              y: Y_shu[j: z]})
+                        print("\tStep {}:".format(counter + 1))
+                        print("\t\tCost: {}".format(step_cost))
+                        print("\t\tAccuracy: {}".format(step_accu))
+                    if (z + batch_size <= m):
+                        j += batch_size
+                        z += batch_size
+                    else:
+                        j += m % batch_size
+                        z += m % batch_size
+                    counter += 1
 
         return saver.save(sess, save_path)
