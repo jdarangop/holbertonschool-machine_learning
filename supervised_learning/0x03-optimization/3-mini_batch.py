@@ -30,17 +30,17 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
         loss = tf.get_collection("loss")[0]
         train_op = tf.get_collection("train_op")[0]
         for i in range(epochs + 1):
-            X_shu, Y_shu = shuffle_data(X_train, Y_train)
-            accu_train = sess.run(accuracy, feed_dict={x: X_shu, y: Y_shu})
-            loss_train = sess.run(loss, feed_dict={x: X_shu, y: Y_shu})
-            accu_valid = sess.run(accuracy, feed_dict={x: X_valid, y: Y_valid})
-            loss_valid = sess.run(loss, feed_dict={x: X_valid, y: Y_valid})
+            accu_train = sess.run(accuracy, feed_dict={x: X_train, y: Y_train})
+            loss_train = sess.run(loss, feed_dict={x: X_train, y: Y_train})
+            accu_valid = sess.run(accuracy, feed_dict={x: X_train, y: Y_train})
+            loss_valid = sess.run(loss, feed_dict={x: X_train, y: Y_train})
             print("After {} epochs:".format(i))
             print("\tTraining Cost: {}".format(loss_train))
             print("\tTraining Accuracy: {}".format(accu_train))
             print("\tValidation Cost: {}".format(loss_valid))
             print("\tValidation Accuracy: {}".format(accu_valid))
             if i < epochs:
+                X_shu, Y_shu = shuffle_data(X_train, Y_train)
                 counter = 0
                 j = 0
                 z = batch_size
