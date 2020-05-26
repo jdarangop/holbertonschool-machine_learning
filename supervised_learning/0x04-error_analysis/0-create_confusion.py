@@ -11,8 +11,8 @@ def create_confusion_matrix(labels, logits):
     """
     classes = labels.shape[1]
     result = np.zeros((classes, classes))
-    #correct = np.argmax(labels, axis=1)
-    #predicted = np.argmax(logits, axis=1)
+    # correct = np.argmax(labels, axis=1)
+    # predicted = np.argmax(logits, axis=1)
     for i in range(labels.shape[0]):
         row = np.argmax(labels[i])
         column = np.argmax(logits[i])
