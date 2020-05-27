@@ -60,7 +60,7 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
                         j += batch_size
                         z += batch_size
                     else:
-                        j += m % batch_size
+                        j += z
                         z += m % batch_size
                     counter += 1
 
