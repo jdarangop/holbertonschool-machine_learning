@@ -56,11 +56,10 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
                         print("\tStep {}:".format(counter + 1))
                         print("\t\tCost: {}".format(step_cost))
                         print("\t\tAccuracy: {}".format(step_accu))
+                    j = z
                     if (z + batch_size <= m):
-                        j += batch_size
                         z += batch_size
                     else:
-                        j += z
                         z += m % batch_size
                     counter += 1
 
