@@ -28,10 +28,10 @@ def dropout_forward_prop(X, weights, L, keep_prob):
             d = np.where(d, 1, 0)
             a_reg = a * d
             a_reg /= keep_prob
+            cache[keyD] = d
         else:
-            sumatory = np.sum(np.exp(z), axis=0)
+            sumatory = np.sum(np.exp(z), axis=0, keepdims=True)
             a_reg = np.exp(z) / sumatory
         cache[keyA] = a_reg
-        cache[keyD] = d
 
     return cache

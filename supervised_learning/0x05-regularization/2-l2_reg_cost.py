@@ -9,4 +9,4 @@ def l2_reg_cost(cost):
         cost: (tf.Tensor) cost without L2 regularization.
         Returns: A tensor containing the cost with L2 regularization.
     """
-    return cost + tf.losses.get_regularization_loss()
+    return cost + tf.losses.get_regularization_losses()
