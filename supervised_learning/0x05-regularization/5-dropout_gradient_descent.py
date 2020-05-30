@@ -18,10 +18,11 @@ def dropout_gradient_descent(Y, weights, cache, alpha,
     weights_copy = weights.copy()
     m = Y.shape[1]
     for i in range(1, L + 1)[::-1]:
-        A = cache["A{}".format(i)]
+        A = cache["A" + str(i)]
         if i == L:
             dZ = A - Y
         else:
+            W = weights_copy["W" + str(i + 1)]
             dZ = np.matmul(W.T, dZ) * (1 - (A ** 2))
             dZ *= cache["D" + str(i)]
             dZ /= keep_prob
