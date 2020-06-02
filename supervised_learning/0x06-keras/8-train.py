@@ -39,7 +39,9 @@ def train_model(network, data, labels, batch_size, epochs,
 
     callbacks = []
     if early_stopping:
-        EarlyStopping = K.callbacks.EarlyStopping(patience=patience)
+        EarlyStopping = K.callbacks.EarlyStopping(patience=patience,
+                                                  monitor='val_loss',
+                                                  mode='min')
         callbacks.append(EarlyStopping)
     if learning_rate_decay:
         decay = K.callbacks.LearningRateScheduler(learning_rate_decay,
