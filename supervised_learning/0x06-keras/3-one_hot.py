@@ -11,4 +11,4 @@ def one_hot(labels, classes=None):
         Returns:
             (numpy.ndarray) with the labels One-Hot encoding.
     """
-    return K.utils.to_categorical(labels)
+    return K.utils.to_categorical(labels, num_classes=classes)
