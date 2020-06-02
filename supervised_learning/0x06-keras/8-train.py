@@ -44,11 +44,11 @@ def train_model(network, data, labels, batch_size, epochs,
                                                  monitor='val_loss',
                                                  mode='min')
         callbacks.append(checkpoint)
-    if learning_rate_decay and validation_data:
+    if validation_data and learning_rate_decay:
         decay = K.callbacks.LearningRateScheduler(learning_rate_decay,
                                                   verbose=1)
         callbacks.append(decay)
-    if early_stopping and validation_data:
+    if validation_data and early_stopping:
         EarlyStopping = K.callbacks.EarlyStopping(patience=patience,
                                                   monitor='val_loss',
                                                   mode='min')
