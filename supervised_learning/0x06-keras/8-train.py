@@ -47,7 +47,7 @@ def train_model(network, data, labels, batch_size, epochs,
         decay = K.callbacks.LearningRateScheduler(learning_rate_decay,
                                                   verbose=1)
         callbacks.append(decay)
-    if save_best:
+    if save_best and validation_data is not None:
         checkpoint = K.callbacks.ModelCheckpoint(filepath=filepath,
                                                  save_best_only=True,
                                                  monitor='val_loss',
