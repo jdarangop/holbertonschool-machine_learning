@@ -38,6 +38,12 @@ def train_model(network, data, labels, batch_size, epochs,
         return alpha_utd
 
     callbacks = []
+    if save_best:
+        checkpoint = K.callbacks.ModelCheckpoint(filepath=filepath,
+                                                 save_best_only=True,
+                                                 monitor='val_loss',
+                                                 mode='min')
+        callbacks.append(checkpoint)
     if early_stopping and validation_data:
         EarlyStopping = K.callbacks.EarlyStopping(patience=patience,
                                                   monitor='val_loss',
@@ -47,12 +53,6 @@ def train_model(network, data, labels, batch_size, epochs,
         decay = K.callbacks.LearningRateScheduler(learning_rate_decay,
                                                   verbose=1)
         callbacks.append(decay)
-    if save_best:
-        checkpoint = K.callbacks.ModelCheckpoint(filepath=filepath,
-                                                 save_best_only=True,
-                                                 monitor='val_loss',
-                                                 mode='min')
-        callbacks.append(checkpoint)
 
     return network.fit(data, labels, batch_size=batch_size,
                        epochs=epochs, verbose=verbose,
