@@ -3,7 +3,8 @@
 import numpy as np
 
 
-def convolution(image, kernel):
+# def convolution(images, kernel):
+def convolve_grayscale_valid(images, kernel):
     """ perform the convolution for an image.
         Args:
             image: (numpy.ndarray) image which the
@@ -14,16 +15,18 @@ def convolution(image, kernel):
             (numpy.ndarray) with the result of the convolution
                             in the image.
     """
-    img_row = image.shape[0]
-    img_col = image.shape[1]
+    number_img = images.shape[0]
+    img_row = images.shape[1]
+    img_col = images.shape[2]
     kernel_row = kernel.shape[0]
     kernel_col = kernel.shape[1]
-    result = np.zeros((img_row - kernel_row + 1, img_col - kernel_col + 1))
+    result = np.zeros((number_img, img_row - kernel_row + 1,
+                       img_col - kernel_col + 1))
     i = 0
     j = 0
     while(True):
-        result[j][i] += np.sum(image[j:j + kernel_row,
-                               i:i + kernel_col] * kernel)
+        result[:, j, i] = np.sum(images[:, j:j + kernel_row,
+                                 i:i + kernel_col] * kernel, axis=(1, 2))
         if i < img_col - kernel_col:
             i += 1
         elif j < img_row - kernel_row:
@@ -33,7 +36,8 @@ def convolution(image, kernel):
             return result
 
 
-def convolve_grayscale_valid(images, kernel):
+# def convolve_grayscale_valid(images, kernel):
+def convolution(images, kernel):
     """ performs a valid convolution on grayscale images.
         Args:
             images: (numpy.ndarray) containing multiple grayscale images.
@@ -41,7 +45,8 @@ def convolve_grayscale_valid(images, kernel):
         Returns:
             (numpy.ndarray) containing the convoluded images.
     """
-    images_convoluded = []
-    for i in images:
-        images_convoluded.append(convolution(i, kernel))
-    return np.array(images_convoluded)
+    # images_convoluded = []
+    # for i in images:
+    #     images_convoluded.append(convolution(i, kernel))
+    images_conv = convolution(images, kernel)
+    return images_conv
