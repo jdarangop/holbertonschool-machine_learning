@@ -16,17 +16,17 @@ def convolution(image, kernel):
     """
     img_row = image.shape[0]
     img_col = image.shape[1]
-    kernel_side = kernel.shape[0]
-    # col_k = kernel.shape[1]
-    result = np.zeros((img_row - kernel_side + 1, img_col - kernel_side + 1))
+    kernel_row = kernel.shape[0]
+    kernel_col = kernel.shape[1]
+    result = np.zeros((img_row - kernel_row + 1, img_col - kernel_col + 1))
     i = 0
     j = 0
     while(True):
-        result[j][i] += np.sum(image[j:j + kernel_side,
-                               i:i + kernel_side] * kernel)
-        if i < img_col - kernel_side:
+        result[j][i] += np.sum(image[j:j + kernel_row,
+                               i:i + kernel_col] * kernel)
+        if i < img_col - kernel_col:
             i += 1
-        elif j < img_row - kernel_side:
+        elif j < img_row - kernel_row:
             j += 1
             i = 0
         else:
