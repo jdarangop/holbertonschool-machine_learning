@@ -39,8 +39,8 @@ def convolve(images, kernels, padding='same', stride=(1, 1)):
     result = np.zeros((number_img, int((img_p_row - kernel_row) / s_row) + 1,
                        int((img_p_col - kernel_col) / s_col) + 1,
                       num_kernels))
-    h = int((img_p_col - kernel_row) / s_row) + 1
-    w = int((img_p_row - kernel_col) / s_col) + 1
+    h = int((img_p_row - kernel_row) / s_row) + 1
+    w = int((img_p_col - kernel_col) / s_col) + 1
     for j in range(h):
         for i in range(w):
             for k in range(num_kernels):
