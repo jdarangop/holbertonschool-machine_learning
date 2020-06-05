@@ -3,7 +3,7 @@
 import numpy as np
 
 
-def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
+def convolve_channels(images, kernel, padding='same', stride=(1, 1)):
     """ performs a valid convolution on grayscale images.
         Args:
             images: (numpy.ndarray) containing multiple grayscale images.
@@ -14,8 +14,11 @@ def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
     number_img = images.shape[0]
     img_row = images.shape[1]
     img_col = images.shape[2]
+    channel = images.shape[3]
     kernel_row = kernel.shape[0]
     kernel_col = kernel.shape[1]
+    i_row = img_row - kernel_row + 1
+    i_col = img_col - kernel_col + 1
     s_row = stride[0]
     s_col = stride[1]
     if padding == 'valid':
@@ -28,7 +31,7 @@ def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
         pad_row = padding[0]
         pad_col = padding[1]
     images_pad = np.pad(images, ((0, 0), (pad_row, pad_row),
-                                 (pad_col, pad_col)),
+                                 (pad_col, pad_col), (0, 0)),
                         'constant', constant_values=(0))
     img_p_row = images_pad.shape[1]
     img_p_col = images_pad.shape[2]
@@ -42,5 +45,5 @@ def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
                                      j * s_row:j * s_row + kernel_row,
                                      i * s_col:i * s_col + kernel_col] *
                                      kernel,
-                                     axis=(1, 2))
+                                     axis=(1, 2, 3))
     return result
