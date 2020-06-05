@@ -27,15 +27,27 @@ def convolve_grayscale_padding(images, kernel, padding):
                         'constant', constant_values=(0))
     result = np.zeros((number_img, images_pad.shape[1] - kernel_row + 1,
                        images_pad.shape[2] - kernel_col + 1))
-    i = 0
-    j = 0
-    while(True):
-        result[:, j, i] = np.sum(images_pad[:, j:j + kernel_row,
-                                 i:i + kernel_col] * kernel, axis=(1, 2))
-        if i < img_col - kernel_col:
-            i += 1
-        elif j < img_row - kernel_row:
-            j += 1
-            i = 0
-        else:
-            return result
+    h = images_pad.shape[1] - kernel_col + 1
+    w = images_pad.shape[2] - kernel_row + 1
+    # result = np.zeros((number_img, h, w))
+    # i = 0
+    # j = 0
+    for j in range(h):
+        for i in range(w):
+            result[:, j, i] = np.sum(images_pad[:, j:j + kernel_row,
+                                     i:i + kernel_col] * kernel,
+                                     axis=(1, 2))
+            # result[:, j, i] = np.sum(images_pad[:, j:j + kernel_row,
+            #                          i:i + kernel_col] * kernel,
+            #                          axis=(1, 2))
+
+    # while(True):
+    #    result[:, j, i] = np.sum(images_pad[:, j:j + kernel_row,
+    #                             i:i + kernel_col] * kernel, axis=(1, 2))
+    #    if i < img_col - kernel_col:
+    #        i += 1
+    #    elif j < img_row - kernel_row:
+    #        j += 1
+    #        i = 0
+    #    else:
+    return result

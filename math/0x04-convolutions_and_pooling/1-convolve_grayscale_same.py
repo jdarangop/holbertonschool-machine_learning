@@ -28,15 +28,18 @@ def convolve_grayscale_same(images, kernel):
                                  (pad_col, pad_col)),
                         'constant', constant_values=(0))
     result = np.zeros((number_img, img_row, img_col))
-    i = 0
-    j = 0
-    while(True):
-        result[:, j, i] = np.sum(images_pad[:, j:j + kernel_row,
-                                 i:i + kernel_col] * kernel, axis=(1, 2))
-        if i < img_col - kernel_col:
-            i += 1
-        elif j < img_row - kernel_row:
-            j += 1
-            i = 0
-        else:
-            return result
+    # i = 0
+    # j = 0
+    # while(True):
+    for j in range(img_row):
+        for i in range(img_col):
+            result[:, j, i] = np.sum(images_pad[:, j:j + kernel_row,
+                                     i:i + kernel_col] * kernel,
+                                     axis=(1, 2))
+        # if i < img_col - kernel_col:
+        #    i += 1
+        # elif j < img_row - kernel_row:
+        #    j += 1
+        #    i = 0
+        # else:
+    return result
