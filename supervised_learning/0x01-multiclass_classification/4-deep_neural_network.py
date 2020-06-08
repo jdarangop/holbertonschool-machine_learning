@@ -68,8 +68,8 @@ class DeepNeuralNetwork(object):
             keyb = "b{}".format(i + 1)
             keyAo = "A{}".format(i)
             keyW = "W{}".format(i + 1)
-            z = (np.matmul(self.weights[keyW], self.cache[keyAo]) +
-                 self.weights[keyb])
+            z = np.matmul(self.weights[keyW],
+                          self.cache[keyAo]) + self.weights[keyb]
             if i != self.L - 1:
                 if self.activation == "sig":
                     self.__cache[keyA] = 1.0 / (1.0 + np.exp(-(z)))
@@ -101,8 +101,12 @@ class DeepNeuralNetwork(object):
             if i == self.L:
                 dZ = A - Y
             else:
-                dZ = np.matmul(init_weights["W" + str(i + 1)].T,
-                               dZ) * A * (1 - A)
+                if self.activation == 'sig':
+                    dZ = np.matmul(init_weights["W" + str(i + 1)].T,
+                                   dZ) * A * (1 - A)
+                else:
+                    dZ = np.matmul(init_weights["W" + str(i + 1)].T,
+                                   dZ) * (1 - (A ** 2))
             dW = np.matmul(dZ, cache["A" + str(i - 1)].T) / m
             db = np.sum(dZ, axis=1, keepdims=True) / m
             W = init_weights["W" + str(i)] - (alpha * dW)
