@@ -42,7 +42,7 @@ def conv_forward(A_prev, W, b, activation,
     for i in range(h_out):
         for j in range(w_out):
             for k in range(c_new):
-                result[:, i, j, k] = np.sum(A_prev[:,
+                result[:, i, j, k] = np.sum(img_pad[:,
                                                    i * sh: i * sh + kh,
                                                    j * sw: j * sw + kw] *
                                             W[:, :, :, k],
