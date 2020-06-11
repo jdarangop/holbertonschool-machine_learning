@@ -25,7 +25,7 @@ def conv_forward(A_prev, W, b, activation,
     kh, kw, c_prev, c_new = W.shape
     sh, sw = stride
 
-    if padding=='same':
+    if padding == 'same':
         pad_h = int(((h_prev * (sh - 1)) + kh) / 2) + 1
         pad_w = int(((w_prev * (sw - 1)) + kw) / 2) + 1
     else:
@@ -46,5 +46,5 @@ def conv_forward(A_prev, W, b, activation,
                                                    i * sh: i * sh + kh,
                                                    j * sw: j * sw + kw] *
                                             W[:, :, :, k],
-                                            axis=(1, 2, 3))
+                                            axis=(1, 2, 3)) + b[:, :, :, k]
     return result
