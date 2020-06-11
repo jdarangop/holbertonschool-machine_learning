@@ -46,5 +46,5 @@ def conv_forward(A_prev, W, b, activation,
                                                    i * sh: i * sh + kh,
                                                    j * sw: j * sw + kw] *
                                             W[:, :, :, k],
-                                            axis=(1, 2, 3)) + b[:, :, :, k]
-    return activation(result)
+                                            axis=(1, 2, 3))
+    return activation(result + b)
