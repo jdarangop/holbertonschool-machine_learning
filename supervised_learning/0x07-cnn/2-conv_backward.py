@@ -36,7 +36,7 @@ def conv_backward(dZ, A_prev, W, b, padding="same",
                      'constant', constant_values=(0))
     dA_prev = np.zeros(img_pad.shape)
     dW = np.zeros(W.shape)
-    db = np.sum(dZ, axis=(0, 1, 2))
+    db = np.sum(dZ, axis=(0, 1, 2), keepdims=True)
     for z in range(m):
         for i in range(h_new):
             for j in range(w_new):
