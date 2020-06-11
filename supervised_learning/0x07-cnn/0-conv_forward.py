@@ -28,6 +28,8 @@ def conv_forward(A_prev, W, b, activation,
     if padding == 'same':
         pad_h = int(((h_prev * (sh - 1)) - sh + kh) / 2)
         pad_w = int(((w_prev * (sw - 1)) - sw + kw) / 2)
+    elif type(padding) == tuple:
+        pad_h, pad_w = padding
     else:
         pad_h = 0
         pad_w = 0
