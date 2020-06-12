@@ -39,7 +39,6 @@ def lenet5(x, y):
     full_lay4 = tf.layers.Dense(units=84,
                                 kernel_initializer=he_normal)(full_lay3)
     softmax = tf.layers.Dense(units=10,
-                              activation=relu,
                               kernel_initializer=he_normal)(full_lay4)
     activated_sof = tf.nn.softmax(softmax)
     loss = tf.losses.softmax_cross_entropy(y, logits=softmax)
