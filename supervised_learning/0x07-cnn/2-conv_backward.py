@@ -47,4 +47,7 @@ def conv_backward(dZ, A_prev, W, b, padding="same",
                     dW[:, :, :, k] += (img_pad[z, i * sh:i * sh + kh,
                                                j * sw:j * sw + kw, :] *
                                        dZ[z, i, j, k])
+    dA_h = dA_prev.shape[1]
+    dA_w = dA_prev.shape[2]
+    dA_prev = dA_prev[:, pad_h:dA_h - pad_h, pad_w:dA_w - pad_w, :]
     return dA_prev, dW, db
