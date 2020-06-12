@@ -39,7 +39,7 @@ def conv_forward(A_prev, W, b, activation,
     img_pad_h = img_pad.shape[1]
     img_pad_w = img_pad.shape[2]
     h_out = int((img_pad_h - kh) / sh) + 1
-    w_out = int((img_pad_w - kw) / sh) + 1
+    w_out = int((img_pad_w - kw) / sw) + 1
     result = np.zeros((m, h_out, w_out, c_new))
     for i in range(h_out):
         for j in range(w_out):
