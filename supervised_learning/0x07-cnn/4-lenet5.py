@@ -40,12 +40,12 @@ def lenet5(x, y):
                                 kernel_initializer=he_normal)(full_lay3)
     softmax = tf.layers.Dense(units=10,
                               kernel_initializer=he_normal)(full_lay4)
-    activated_sof = tf.nn.softmax(softmax)
     loss = tf.losses.softmax_cross_entropy(y, logits=softmax)
     y_max = tf.argmax(y, axis=1)
     y_pred_max = tf.argmax(activated_sof, axis=1)
     bias = tf.cast(tf.equal(y_max, y_pred_max), dtype=tf.float32)
     accuracy = tf.reduce_mean(bias)
     train = tf.train.AdamOptimizer().minimize(loss)
+    activated_sof = tf.nn.softmax(softmax)
 
     return activated_sof, train, loss, accuracy
