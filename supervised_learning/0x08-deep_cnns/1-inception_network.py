@@ -1,4 +1,4 @@
-#/usr/bin/env python3
+#!/usr/bin/env python3
 """ Inception Network """
 import tensorflow.keras as K
 inception_block = __import__('0-inception_block').inception_block
@@ -34,7 +34,7 @@ def inception_network():
     layer = inception_block(layer, (256, 160, 320, 32, 128, 128))
     layer = inception_block(layer, (384, 192, 384, 48, 128, 128))
     layer = K.layers.AveragePooling2D((7, 7), padding='same',
-                                       strides=(1, 1))(layer)
+                                      strides=(1, 1))(layer)
     layer = K.layers.Dropout(0.4)(layer)
     output = K.layers.Dense(units=1000, activation='softmax')(layer)
 
