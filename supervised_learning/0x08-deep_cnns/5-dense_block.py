@@ -26,9 +26,9 @@ def dense_block(X, nb_filters, growth_rate, layers):
         layer = K.layers.Activation('relu')(layer)
         layer = K.layers.Conv2D(growth_rate, (3, 3),
                                 padding='same',
-                                activation='relu',
+                                # activation='relu',
                                 kernel_initializer='he_normal')(layer)
-        X = K.layers.Concatenate()([X, layer])
+        X = K.layers.concatenate([X, layer])
         nb_filters += growth_rate
 
     return X, nb_filters

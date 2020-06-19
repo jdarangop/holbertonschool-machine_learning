@@ -13,12 +13,15 @@ def inception_network():
     """
     input_lay = K.Input(shape=(224, 224, 3))
     layer = K.layers.Conv2D(64, (7, 7), padding='same', strides=(2, 2),
+                            kernel_initializer='he_normal',
                             activation='relu')(input_lay)
     layer = K.layers.MaxPool2D((3, 3), padding='same',
                                strides=(2, 2))(layer)
-    layer = K.layers.Conv2D(64, (3, 3), padding='same', strides=(1, 1),
+    layer = K.layers.Conv2D(64, (1, 1), padding='same', strides=(1, 1),
+                            kernel_initializer='he_normal',
                             activation='relu')(layer)
     layer = K.layers.Conv2D(192, (3, 3), padding='same', strides=(1, 1),
+                            kernel_initializer='he_normal',
                             activation='relu')(layer)
     layer = K.layers.MaxPool2D((3, 3), padding='same',
                                strides=(2, 2))(layer)
@@ -38,8 +41,9 @@ def inception_network():
     layer = K.layers.AveragePooling2D((7, 7), padding='same',
                                       strides=(1, 1))(layer)
     layer = K.layers.Dropout(0.4)(layer)
-    output = K.layers.Dense(units=1000, activation='softmax')(layer)
+    layer = K.layers.Dense(units=1000, kernel_initializer='he_normal',
+                           activation='softmax')(layer)
 
-    output = K.models.Model(inputs=input_lay, outputs=output)
+    output = K.models.Model(inputs=input_lay, outputs=layer)
 
     return output
