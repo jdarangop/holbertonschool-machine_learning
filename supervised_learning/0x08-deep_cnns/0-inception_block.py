@@ -13,18 +13,24 @@ def inception_block(A_prev, filters):
     """
     F1, F3R, F3, F5R, F5, FPP = filters
     conv1 = K.layers.Conv2D(F1, (1, 1), padding='same',
+                            kernel_initializer='he_normal',
                             activation='relu')(A_prev)
     conv3R = K.layers.Conv2D(F3R, (1, 1), padding='same',
+                             kernel_initializer='he_normal',
                              activation='relu')(A_prev)
     conv3 = K.layers.Conv2D(F3,  (3, 3), padding='same',
+                            kernel_initializer='he_normal',
                             activation='relu')(conv3R)
     conv5R = K.layers.Conv2D(F5R, (1, 1), padding='same',
+                             kernel_initializer='he_normal',
                              activation='relu')(A_prev)
     conv5 = K.layers.Conv2D(F5, (5, 5), padding='same',
+                            kernel_initializer='he_normal',
                             activation='relu')(conv5R)
     maxpool = K.layers.MaxPooling2D((3, 3), strides=(1, 1),
                                     padding='same')(A_prev)
     convmax = K.layers.Conv2D(FPP, (1, 1), padding='same',
+                              kernel_initializer='he_normal',
                               activation='relu')(maxpool)
 
     incep_block = K.layers.concatenate([conv1, conv3,
