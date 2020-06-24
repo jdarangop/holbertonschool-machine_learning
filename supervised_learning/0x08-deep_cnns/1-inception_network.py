@@ -29,7 +29,7 @@ def inception_network():
     layer = inception_block(layer, (128, 128, 192, 32, 96, 64))
     layer = K.layers.MaxPool2D((3, 3), padding='same',
                                strides=(2, 2))(layer)
-    layer = inception_block(layer, (192, 92, 208, 16, 48, 64))
+    layer = inception_block(layer, (192, 96, 208, 16, 48, 64))
     layer = inception_block(layer, (160, 112, 224, 24, 64, 64))
     layer = inception_block(layer, (128, 128, 256, 24, 64, 64))
     layer = inception_block(layer, (112, 144, 288, 32, 64, 64))
