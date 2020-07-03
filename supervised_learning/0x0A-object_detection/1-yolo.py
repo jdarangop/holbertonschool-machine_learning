@@ -48,10 +48,10 @@ class Yolo(object):
             bw /= self.model.input.shape[1].value
             bh /= self.model.input.shape[2].value
 
-            boxes[i][:, :, :, 0] = (bx - bw) / 2 * image_width
-            boxes[i][:, :, :, 1] = (by - bh) / 2 * image_height
-            boxes[i][:, :, :, 2] = (bx + bw) / 2 * image_width
-            boxes[i][:, :, :, 3] = (by + bh) / 2 * image_height
+            boxes[i][:, :, :, 0] = (bx - (bw / 2)) * image_width
+            boxes[i][:, :, :, 1] = (by - (bh / 2)) * image_height
+            boxes[i][:, :, :, 2] = (bx + (bw / 2)) * image_width
+            boxes[i][:, :, :, 3] = (by + (bh / 2)) * image_height
 
             box_conf = (1 / (1 + np.exp(-outputs[i][:, :, :, 4:5])))
             box_conf.reshape(grid_height, grid_width, anchor_boxes, 1)
