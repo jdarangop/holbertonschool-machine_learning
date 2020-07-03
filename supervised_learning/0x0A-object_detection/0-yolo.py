@@ -11,7 +11,7 @@ class Yolo(object):
         model = K.models.load_model(model_path)
         self.model = model
         with open(classes_path, 'r') as fp:
-            classes = fp.readlines()
+            classes = [i.strip() for i in fp.readlines()]
             self.class_names = classes
         self.class_t = class_t
         self.nms_t = nms_t
