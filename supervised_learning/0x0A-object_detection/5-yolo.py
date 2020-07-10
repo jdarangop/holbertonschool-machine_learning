@@ -103,7 +103,7 @@ class Yolo(object):
         image_paths = glob.glob(folder_path + "/*")
         images = []
         for i in paths:
-            iamges.append(cv2.imread(i))
+            images.append(cv2.imread(i))
         return images, image_paths
 
     def preprocess_images(self, images):
