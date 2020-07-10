@@ -2,6 +2,7 @@
 """ Yolo """
 import tensorflow.keras as K
 import glob
+import cv2
 
 
 class Yolo(object):
