@@ -36,6 +36,8 @@ def determinant(matrix):
         return 1
     num_rows = len(matrix)
     for i in matrix:
+        if type(i) != list:
+            raise TypeError('matrix must be a list of lists')
         if len(i) != num_rows:
             raise ValueError('matrix must be a square matrix')
     return recursion_determinant(matrix)
