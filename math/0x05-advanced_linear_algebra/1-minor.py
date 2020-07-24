@@ -33,7 +33,7 @@ def minor(matrix):
     """
     if type(matrix) != list or matrix == [] or type(matrix[0]) != list:
         raise TypeError('matrix must be a list of lists')
-    if matrix = [[]]:
+    if matrix == [[]]:
         raise ValueError('matrix must be a non-empty square matrix')
     num_rows = len(matrix)
     if num_rows == 1:
