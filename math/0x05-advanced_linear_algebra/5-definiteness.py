@@ -18,6 +18,8 @@ def definiteness(matrix):
         raise TypeError('matrix must be a numpy.ndarray')
     if len(matrix.shape) < 2 or len(set(matrix.shape)) != 1:
         return None
+    if np.array_equal(matrix, matrix.T) is False:
+        return None
     flag = None
     var = None
     for i in range(matrix.shape[0]):
