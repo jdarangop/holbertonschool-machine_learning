@@ -68,7 +68,9 @@ def adjugate(matrix):
         Returns:
             (list) the adjugate matrix of matrix.
     """
-
+    num_rows = len(matrix)
+    if num_rows == 1:
+        return [[1]]
     cofactor_mat = cofactor(matrix)
 
     result = []
@@ -99,8 +101,6 @@ def inverse(matrix):
     if matrix == [[]]:
         raise ValueError('matrix must be a non-empty square matrix')
     num_rows = len(matrix)
-    if num_rows == 1:
-        return [[1]]
     for i in matrix:
         if type(i) != list:
             raise TypeError('matrix must be a list of lists')
