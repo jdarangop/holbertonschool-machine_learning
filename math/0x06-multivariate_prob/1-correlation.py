@@ -15,5 +15,5 @@ def correlation(C):
     if len(C.shape) != 2 or C.shape[0] != C.shape[1]:
         raise ValueError('C must be a 2D square matrix')
     var = np.diag(np.diag(C) ** (-1/2))
-    corr = var @ C @ var
+    corr = np.matmul(np.matmul(var, C), var)
     return corr
