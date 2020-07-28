@@ -16,5 +16,5 @@ class MultiNormal(object):
         X = data.T
         mean = np.mean(X, axis=0, keepdims=True)
         cov = np.matmul((X - mean).T, (X - mean)) / (n - 1)
-        self.mean = mean
+        self.mean = mean.T
         self.cov = cov
