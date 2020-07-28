@@ -30,7 +30,7 @@ class MultiNormal(object):
         if type(x) != np.ndarray:
             raise TypeError('x must be a numpy.ndarray')
         if len(x.shape) != 2 or x.shape[1] != 1:
-            raise ValueError('x must have the shape ({d}, 1)'
+            raise ValueError('x must have the shape ({}, 1)'
                              .format(self.cov.shape[0]))
         n = x.shape[0]
         den = np.sqrt(((2 * np.pi) ** n) * np.linalg.det(self.cov))
