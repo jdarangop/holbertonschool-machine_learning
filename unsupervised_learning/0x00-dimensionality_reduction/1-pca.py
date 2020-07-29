@@ -16,5 +16,6 @@ def pca(X, ndim):
     U, P, V = np.linalg.svd(X_m, full_matrices=False)
     # threshold = np.sum(P) * var
     # index = np.argmax(np.cumsum(P) > threshold)
-    result = np.matmul(U[:, :ndim], np.diag(P[:ndim]))
+    # result = np.matmul(U[:, :ndim], np.diag(P[:ndim]))
+    result = np.matmul(X_m, V.T[:, :ndim])
     return result
