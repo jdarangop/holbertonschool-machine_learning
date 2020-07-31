@@ -4,9 +4,8 @@ import numpy as np
 import math
 
 
-def intersection(x, n, P, Pr):
-    """ calculates the intersection of obtaining this
-        data with the various hypothetical probabilities.
+def posterior(x, n, P, Pr):
+    """ calculates the posterior probability of obtaining the data.
         Args:
             x: (int) number of patients.
             n: (int) total number of patients observed.
@@ -14,9 +13,8 @@ def intersection(x, n, P, Pr):
                hypothetical probabilities.
             Pr: (numpy.ndarray) containing the prior beliefs of P.
         Returns:
-            (numpy.ndarray) containing the intersection of
-                            obtaining x and n with each
-                            probability in P.
+            (numpy.ndarray)  the posterior probability of each
+                             probability in P given x and n.
     """
     if type(n) != int or n <= 0:
         raise ValueError('n must be a positive integer')
@@ -40,4 +38,4 @@ def intersection(x, n, P, Pr):
     comb = math.factorial(n) / (math.factorial(x) * math.factorial(n - x))
     for i in range(P.shape[0]):
         result[i] = comb * (P[i] ** x) * ((1 - P[i]) ** (n - x)) * Pr[i]
-    return result
+    return result / np.sum(result)
