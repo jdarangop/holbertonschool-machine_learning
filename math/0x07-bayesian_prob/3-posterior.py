@@ -19,8 +19,8 @@ def posterior(x, n, P, Pr):
     if type(n) != int or n <= 0:
         raise ValueError('n must be a positive integer')
     if type(x) != int or x < 0:
-        raise ValueError('x must be an integer that \
-                         is greater than or equal to 0')
+        err = 'x must be an integer that is greater than or equal to 0'
+        raise ValueError(err)
     if x > n:
         raise ValueError('x cannot be greater than n')
     if type(P) != np.ndarray:
