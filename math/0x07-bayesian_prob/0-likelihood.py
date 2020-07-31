@@ -25,7 +25,7 @@ def likelihood(x, n, P):
         raise ValueError(err)
     if x > n:
         raise ValueError('x cannot be greater than n')
-    if type(P) != np.ndarray:
+    if type(P) != np.ndarray or len(P.shape) != 1:
         raise TypeError('P must be a 1D numpy.ndarray')
     result = np.zeros(P.shape)
     comb = math.factorial(n) / (math.factorial(x) * math.factorial(n - x))
