@@ -13,7 +13,7 @@ def initialize(X, k):
             (numpy.ndarray) containing the initialized centroids
                             for each cluster, or None on failure.
     """
-    if type(X) != np.ndarray or type(k) != int or len(X.shape) != 2:
+    if type(X) != np.ndarray or type(k) != int or len(X.shape) != 2 or k <= 0:
         return None
     n, d = X.shape
     centroids = np.zeros((k, X.shape[1]))
