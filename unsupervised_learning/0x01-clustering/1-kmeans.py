@@ -14,7 +14,7 @@ def initialize(X, k):
                             for each cluster, or None on failure.
     """
     if type(X) != np.ndarray or type(k) != int or len(X.shape) != 2 or k <= 0:
-        return None, None
+        return None
     n, d = X.shape
     centroids = np.zeros((k, X.shape[1]))
     centroids = np.random.uniform(low=X.min(axis=0), high=X.max(axis=0),
