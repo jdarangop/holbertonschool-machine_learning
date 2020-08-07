@@ -22,6 +22,8 @@ def pdf(X, m, S):
     if type(S) != np.ndarray or len(S.shape) != 2:
         return None
     n, d = X.shape
+    if m.shape[0] != d or S.shape[0] != d or S.shape[0] != S.shape[1]:
+        return None
     den = np.sqrt(((2 * np.pi) ** d) * np.linalg.det(S))
     cov_inv = np.linalg.inv(S)
     expo = (-0.5 * np.sum(np.matmul(cov_inv, (X.T - m[:, np.newaxis])) *
