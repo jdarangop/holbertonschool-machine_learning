@@ -13,6 +13,8 @@ def variance(X, C):
             (float) the total variance.
     """
     try:
+        if X.shape[1] != C.shape[1]:
+            return None
         distance = np.sqrt((X[:, np.newaxis, 0] - C[:, 0])**2 +
                            (X[:, np.newaxis, 1] - C[:, 1])**2)
         min_dist = np.min(distance, axis=1)
