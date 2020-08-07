@@ -29,5 +29,5 @@ def pdf(X, m, S):
     expo = (-0.5 * np.sum(np.matmul(cov_inv, (X.T - m[:, np.newaxis])) *
                           (X.T - m[:, np.newaxis]), axis=0))
     result = (1 / den) * np.exp(expo)
-    np.where(result < 1e-300, 1e-300, result)
+    result = np.where(result < 1e-300, 1e-300, result)
     return result
