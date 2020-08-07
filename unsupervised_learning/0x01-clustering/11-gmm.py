@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """ GMM """
-import numpy as np
 import sklearn.mixture
 
 

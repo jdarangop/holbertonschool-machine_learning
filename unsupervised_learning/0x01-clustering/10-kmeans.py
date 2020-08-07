@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """ Hello, sklearn! """
-import numpy as np
 import sklearn.cluster
 
 
