@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """ EM """
 import numpy as np
 initialize = __import__('4-initialize').initialize
