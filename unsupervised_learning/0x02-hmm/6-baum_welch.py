@@ -32,9 +32,9 @@ def forward(Observation, Emission, Transition, Initial):
     if Initial.shape[0] != N or Initial.shape[1] != 1:
         return None, None
     F = np.zeros((N, T))
-    for i in range(N):
-        F[i, 0] = Initial[i, 0] * Emission[i, Observation[0]]
-    # F[:, 0] = Initial[:, 0] * Emission[:, Observation[0]]
+    # for i in range(N):
+    #    F[i, 0] = Initial[i, 0] * Emission[i, Observation[0]]
+    F[:, 0] = Initial[:, 0] * Emission[:, Observation[0]]
     for t in range(1, T):
         for j in range(N):
             F[j, t] = np.sum(Transition[:, j] * F[:, t - 1] *
@@ -73,8 +73,9 @@ def backward(Observation, Emission, Transition, Initial):
     if Initial.shape[0] != N or Initial.shape[1] != 1:
         return None, None
     B = np.zeros((N, T))
-    for i in range(N):
-        B[i, T - 1] = 1
+    # for i in range(N):
+    #     B[i, T - 1] = 1
+    B[:, T - 1] = 1
     for t in list(range(T - 1))[::-1]:
         for j in range(N):
             B[j, t] = np.sum(B[:, t + 1] *
