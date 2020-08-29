@@ -44,21 +44,22 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
     output_layer = keras.layers.Dense(input_dims, activation='sigmoid')(prev)
     decoder = keras.models.Model(decoder_input, output_layer)
 
-    input_layer = keras.layers.Input(shape=(input_dims,))
-    encoder_out, m, sig = encoder(input_layer)
+    # input_layer = keras.layers.Input(shape=(input_dims,))
+    encoder_out, m, sig = encoder(encoder_input)
     decoder_out = decoder(encoder_out)
-    auto = keras.models.Model(input_layer, decoder_out)
+    auto = keras.models.Model(encoder_input, decoder_out)
 
     def va_loss(y_actual, y_predicted):
         """ Variational Autoencoder loss function. """
         loss = keras.backend.binary_crossentropy(y_actual, y_predicted)
+        loss_sum = keras.backend.sum(loss, axis=1)
         kl_divergence = (-0.5 * keras.backend.mean(1 + sigma -
                                                    keras.backend.square(mean) -
                                                    keras.backend.exp(sigma),
                                                    axis=-1))
-        return loss + kl_divergence
+        return loss_sum + kl_divergence
 
-    auto.compile(optimizer='adam', loss='binary_crossentropy')
-    # auto.compile(optimizer='adam', loss=va_loss)
+    # auto.compile(optimizer='adam', loss='binary_crossentropy')
+    auto.compile(optimizer='adam', loss=va_loss)
 
     return encoder, decoder, auto
