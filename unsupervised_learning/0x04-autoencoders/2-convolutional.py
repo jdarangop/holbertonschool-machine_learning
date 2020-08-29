@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """ Convolutional Autoencoder """
 import tensorflow.keras as keras
-import tensorflow as tf
 
 
 def autoencoder(input_dims, filters, latent_dims):
