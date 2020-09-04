@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """ Generator """
-import numpy as np
 import tensorflow as tf
 
 
@@ -18,4 +17,4 @@ def generator(Z):
         layer2 = tf.keras.layers.Dense(units=784,
                                        activation='sigmoid',
                                        name='layer_2')(layer1)
-    return tf.keras.models.Model(Z, layer2)
+    return layer2
