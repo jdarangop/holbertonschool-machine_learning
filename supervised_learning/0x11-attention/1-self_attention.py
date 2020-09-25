@@ -30,7 +30,8 @@ class SelfAttention(tf.keras.layers.Layer):
                 weights: (tf.Tensor) that contains the attention weights.
         """
         fixed_prev = tf.expand_dims(s_prev, axis=1)
-        weights = self.V(tf.nn.tanh(self.W(fixed_prev) + self.U(hidden_states)))
+        weights = self.V(tf.nn.tanh(self.W(fixed_prev) +
+                                    self.U(hidden_states)))
         weights = tf.nn.softmax(weights)
         context = tf.reduce_sum(weights * hidden_states)
 

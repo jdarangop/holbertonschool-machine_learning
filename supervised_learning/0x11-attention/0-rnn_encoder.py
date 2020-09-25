@@ -11,7 +11,8 @@ class RNNEncoder(tf.keras.layers.Layer):
         super().__init__()
         self.batch = batch
         self.units = units
-        self.embedding = tf.keras.layers.Embedding(input_dim=vocab, output_dim=embedding)
+        self.embedding = tf.keras.layers.Embedding(input_dim=vocab,
+                                                   output_dim=embedding)
         self.gru = tf.keras.layers.GRU(units=units,
                                        kernel_initializer="glorot_uniform",
                                        return_sequences=True,
@@ -28,14 +29,16 @@ class RNNEncoder(tf.keras.layers.Layer):
         return tf.keras.initializers.Zeros()(shape=(self.batch, self.units))
 
     def call(self, x, initial):
-        """ 
+        """ call method.
             Args:
                 x: (tf.Tensor) containing the input to the encoder layer
                    as word indices within the vocabulary.
                 initial: (tf.Tensor) containing the initial hidden state.
             Returns:
                 outputs: (tf.Tensor) containing the outputs of the encoder.
-                hidden: (tf.Tensor) containing the last hidden state of the encoder.
+                hidden: (tf.Tensor) containing the last
+                        hidden state of the encoder.
         """
-        outputs, hidden = self.gru(inputs=self.embedding(x), initial_state=initial)
+        outputs, hidden = self.gru(inputs=self.embedding(x),
+                                   initial_state=initial)
         return outputs, hidden
