@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """ Self Attention """
 import tensorflow as tf
-import numpy as np
 
 
 class SelfAttention(tf.keras.layers.Layer):
