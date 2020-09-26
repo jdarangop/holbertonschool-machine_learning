@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """ RNN Decoder """
 import tensorflow as tf
-import numpy as np
 SelfAttention = __import__('1-self_attention').SelfAttention
 
 
