@@ -30,10 +30,10 @@ class Dataset(object):
                 tokenizer_en is the English tokenizer
         """
         tokenizer_pt = tfds.features.text.SubwordTextEncoder.build_from_corpus(
-            (en.numpy().decode('utf-8') for pt, en in data),
+            (pt.numpy() for pt, en in data),
             target_vocab_size=2**15)
         tokenizer_en = tfds.features.text.SubwordTextEncoder.build_from_corpus(
-            (pt.numpy().decode('utf-8') for pt, en in data),
+            (en.numpy() for pt, en in data),
             target_vocab_size=2**15)
 
         return tokenizer_pt, tokenizer_en
