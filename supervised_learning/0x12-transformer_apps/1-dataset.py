@@ -51,7 +51,7 @@ class Dataset(object):
                      self.tokenizer_pt.encode(pt.numpy()) +
                      [self.tokenizer_pt.vocab_size+1])
         en_tokens = ([self.tokenizer_en.vocab_size] +
-                     self.tokenizer_pt.encode(en.numpy()) +
+                     self.tokenizer_en.encode(en.numpy()) +
                      [self.tokenizer_en.vocab_size+1])
 
         return pt_tokens, en_tokens
