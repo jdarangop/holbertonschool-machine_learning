@@ -17,10 +17,14 @@ def create_masks(inputs, target):
                           in the decoder.
     """
     seq_encoder = tf.cast(tf.math.equal(inputs, 0), tf.float32)
-    encoder_mask = inputs[:, tf.newaxis, tf.newaxis, :]
+    encoder_mask = seq_encoder[:, tf.newaxis, tf.newaxis, :]
     seq_decoder = tf.cast(tf.math.equal(target, 0), tf.float32)
-    decoder_mask = target[:, tf.newaxis, tf.newaxis, :]
+    decoder_mask = seq_decoder[:, tf.newaxis, tf.newaxis, :]
     mask = 1 - tf.linalg.band_part(tf.ones((target.shape[1],
                                             target.shape[1])), -1, 0)
+    dec_padding_mask = tf.cast(tf.math.equal(target, 0), tf.float32)
+    dec_padding_mask = dec_padding_mask[:, tf.newaxis, tf.newaxis, :]
 
-    return encoder_mask, decoder_mask, mask
+    combined_mask = tf.maximum(dec_padding_mask, mask)
+
+    return encoder_mask, combined_mask, decoder_mask
