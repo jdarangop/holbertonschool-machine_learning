@@ -15,19 +15,29 @@ class Dataset(object):
                          allowed per example sentence.
         """
         self.max_len = max_len
-        self.data_train = tfds.load('ted_hrlr_translate/pt_to_en',
-                                    split='train', as_supervised=True)
-        self.data_valid = tfds.load('ted_hrlr_translate/pt_to_en',
-                                    split='validation', as_supervised=True)
+        examples, metadata = tfds.load('ted_hrlr_translate/pt_to_en',
+                                       with_info=True,
+                                       as_supervised=True)
+        self.data_train = examples['train']
+        self.data_valid = examples['validation']
         pt, en = self.tokenize_dataset(self.data_train)
         self.tokenizer_pt = pt
         self.tokenizer_en = en
+        padded_shapes = ([None], [None])
         self.data_train = self.data_train.map(self.tf_encode)
         self.data_train = self.data_train.filter(self.f_max_len)
-        self.data_train = self.data_train.padded_batch(batch_size)
+        self.data_train = \
+            self.data_train.shuffle(metadata.splits['train'].num_examples)
+        self.data_train = \
+            self.data_train.padded_batch(batch_size,
+                                         padded_shapes=padded_shapes)
+        self.data_train = \
+            self.data_train.prefetch(tf.data.experimental.AUTOTUNE)
         self.data_valid = self.data_valid.map(self.tf_encode)
         self.data_valid = self.data_valid.filter(self.f_max_len)
-        self.data_valid = self.data_valid.padded_batch(batch_size)
+        self.data_valid = \
+            self.data_valid.padded_batch(batch_size,
+                                         padded_shapes=padded_shapes)
 
     def tokenize_dataset(self, data):
         """ creates sub-word tokenizers for our dataset.
