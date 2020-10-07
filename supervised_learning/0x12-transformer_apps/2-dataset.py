@@ -35,7 +35,7 @@ class Dataset(object):
             (pt.numpy() for pt, en in data),
             target_vocab_size=2**15)
         tokenizer_en = tfds.features.text.SubwordTextEncoder.build_from_corpus(
-            (en.numpy() for pt, en in data)
+            (en.numpy() for pt, en in data),
             target_vocab_size=2**15)
 
         return tokenizer_pt, tokenizer_en
