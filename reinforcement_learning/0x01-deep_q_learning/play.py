@@ -6,8 +6,8 @@ import rl
 import gym
 from PIL import Image
 
-build_model = __import__('train_1').build_model
-AtariProcessor = __import__('train_1').AtariProcessor
+build_model = __import__('train').build_model
+AtariProcessor = __import__('train').AtariProcessor
 
 
 env = gym.make('Breakout-v0')
