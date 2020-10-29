@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """ User Location """
-import requests
+import request
 import sys
+import time
 
 
 if __name__ == '__main__':
@@ -10,7 +11,8 @@ if __name__ == '__main__':
         r_json = r.json()
         print(r_json['location'])
     elif r.status_code == 403:
-        time = r.headers['X-Ratelimit-Reset']
-        print('Reset in {} min'.format(time))
+        get_time = r.headers['X-Ratelimit-Reset']
+        reset = (int(get_time) - int(time.time())) / 60
+        print('Reset in {} min'.format(reset))
     else:
         print('Not found')

@@ -21,7 +21,8 @@ def sentientPlanets():
         r_json = r.json()
         link = r_json['next']
         for i in r_json['results']:
-            if i['designation'] == 'sentient':
+            if (i['designation'] == 'sentient' or
+                    i["classification"] == "sentient"):
                 if i['homeworld'] is not None:
                     name = requests.get(i['homeworld'])
                     name = name.json()['name']

@@ -20,4 +20,4 @@ if __name__ == '__main__':
     for name, launches in sorted(rockets.items(),
                                  key=lambda item: item[1],
                                  reverse=True):
-        print("{} : {}".format(name, launches))
+        print("{}: {}".format(name, launches))
