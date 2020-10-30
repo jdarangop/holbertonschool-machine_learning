@@ -41,4 +41,4 @@ df_final['Open'] = df['Open'].resample('D').apply(first)
 df_final['Close'] = df['Close'].resample('D').apply(last)
 
 df.plot()
-# print(df.head())
+plt.show()
