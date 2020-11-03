@@ -5,7 +5,7 @@ CREATE TRIGGER `email_changed`
   ON users FOR EACH ROW
 BEGIN
   IF STRCMP(OLD.email, NEW.email) != 0 THEN
-    SET NEW.valid_email = IF (NEW.valid_email, 0, 1);
+    SET NEW.valid_email = 0;
   END IF;
 END $$
 DELIMITER ;
