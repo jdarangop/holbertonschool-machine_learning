@@ -10,5 +10,4 @@ def list_all(mongo_collection):
             (list) all documents in the collection.
     """
     results = list(mongo_collection.find({}))
-    print(results)
     return results
