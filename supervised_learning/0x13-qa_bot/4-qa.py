@@ -67,8 +67,8 @@ class QA_bot(cmd.Cmd):
         """
         url = 'bert-large-uncased-whole-word-masking-finetuned-squad'
         tokenizer = BertTokenizer.from_pretrained(url)
-        model = TFAutoModelForQuestionAnswering.from_pretrained(url,
-                                                                return_dict=True)
+        model = TFAutoModelForQuestionAnswering.from_pretrained(
+            url, return_dict=True)
 
         filelist = os.listdir(self.corpus_path)
         maximo = None
